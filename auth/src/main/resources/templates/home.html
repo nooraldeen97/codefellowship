@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<h1> Welcome to our website  </h1>
+
+<header th:fragment="header">
+    <div>
+        <h2 > User Name : <span th:text="${user!=null}?${user.username}:'no logged in user'"></span></h2>
+    </div>
+</header>
+
+
+    <h1> Welcome to our website  </h1>
 <h2> Sign up here and enjoy with our service <a href="/signup"> Let's Sign up</a></h2>
+
+
+<div th:if="${user != null}" >
+    <a th:href="'/users/' + ${user.id}">Go to Profile Page<a/>
+
+<form action="/perform_logout" method="get">
+    <label for="logout"></label>
+    <input type="submit" value="Logout" id="logout">
+</form>
+</div>
+
 </body>
 </html>
