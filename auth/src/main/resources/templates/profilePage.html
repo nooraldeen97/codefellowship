@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="home :: header"></div>
+<div>
+    <h1 >User Name :<span th:text="${userInfo.username}" ></span></h1>
+    <h1 > First Name : <span th:text="${userInfo.firstName}"></span></h1>
+    <h1 >Last Name :<span th:text="${userInfo.lastName}"></span></h1>
+    <h1 >Date : <span th:text="${userInfo.dateOfBirth}"></span></h1>
+    <h1 > Bio : <span th:text="${userInfo.bio}"></span></h1>
+</div>
+
+<form action="'/users/' + ${userInfo.id}" method="post" th:object="${postClass}">
+    <label for="body"> Your post body : </label>
+    <input  id="body" name="body" >
+    <label for="createdAt"> Posted at : </label>
+    <input  id="createdAt"  name="createdAt" >
+
+    <input  type="submit" value="Add" >
+</form>
+
+<div th:if="${addedPost != null}">
+    <h3 th:text="${addedPost.body}" > </h3>
+    <h3 th:text="${addedPost.createdAt}"> </h3>
+</div>
+
+</body>
+</html>

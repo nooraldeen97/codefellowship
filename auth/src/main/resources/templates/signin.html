@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,14 +7,15 @@
 <body>
 <form method="POST" action="/perform_login">
   <fieldset>
-    <legend>Sign Up</legend>
-    <label for="userName">User Name:</label>
-    <input name="userName" id="userNAme" type="text" ><br><br>
+    <legend>Sign In</legend>
+    <label for="username">User Name:</label>
+    <input name="username" id="username" type="text" ><br><br>
 
     <label for="password">Password</label>
     <input name="password" id="password" type="password" ><br><br>
-
-    <input type="submit" value="Sign in">
+<!--    <button type="submit" value="Sign in"><a th: href="/users/{id}"></a> </button>-->
+      <input value="Sign In" type="submit">
+<!--      <a th: href="/users/{id}">view profile</a>-->
 
   </fieldset>
 

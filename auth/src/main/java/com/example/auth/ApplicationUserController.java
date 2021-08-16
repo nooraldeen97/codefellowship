@@ -1,12 +1,20 @@
 package com.example.auth;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.security.Principal;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class ApplicationUserController {
@@ -17,6 +25,10 @@ public class ApplicationUserController {
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    PostRepository postRepository;
+
 
     @GetMapping("/login")
     public String getSignIn(){
@@ -39,4 +51,46 @@ public class ApplicationUserController {
         applicationUserRepository.save(newUser);
         return new RedirectView("/login");
     }
+
+
+
+    @GetMapping("/users/{id}")
+    public String getUserInfo(Model m , @PathVariable("id") Integer id , Principal principal){
+        String name = principal.getName();
+        ApplicationUser applicationUser= applicationUserRepository.findByUsername(name);
+        m.addAttribute("user",applicationUser);
+        m.addAttribute("userInfo",applicationUserRepository.findById(id).get());
+
+        List<Post> thePost = (List<Post>) postRepository.findAllByApplicationUserId(id);
+        m.addAttribute("postClass",new Post());
+        m.addAttribute("addedPost",thePost);
+        return "profilePage.html";
+    }
+
+    @PostMapping("/users/{id}")
+    public RedirectView addPosts(Model model,@PathVariable Integer id , @RequestParam(value = "body") String body , @RequestParam(value = "createdAt") String createdAt ){
+        ApplicationUser applicationUser = applicationUserRepository.findById(id).get();
+        Post post=new Post(body,createdAt,applicationUser);
+        model.addAttribute("postClass",new Post());
+        postRepository.save(post);
+
+        return new RedirectView("/users/{id}");
+    }
+
+
+    @GetMapping("/logout")
+    public RedirectView logoutHandler(){
+        return new RedirectView("/");
+    }
+
+
+ @GetMapping ("/error")
+    public String errorHandler(){
+        return "error.html";
+ }
+
+
+
+
 }
+
