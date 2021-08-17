@@ -7,7 +7,7 @@
 <body>
 
 <header th:fragment="header">
-    <div>
+    <div th:if="${user != null}" >
         <h2 > User Name : <span th:text="${user!=null}?${user.username}:'no logged in user'"></span></h2>
     </div>
 </header>

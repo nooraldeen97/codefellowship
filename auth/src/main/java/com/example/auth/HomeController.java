@@ -28,7 +28,7 @@ public class HomeController {
             ApplicationUser applicationUser= applicationUserRepository.findByUsername(name);
             model.addAttribute("user",applicationUser);
         }catch(NullPointerException e) {
-            System.out.println("NullPointerException thrown!");
+            System.out.println("NullPointerException thrown!!!");
             return"home.html";
         }
         return"home.html";

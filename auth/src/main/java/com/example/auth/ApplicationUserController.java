@@ -62,7 +62,7 @@ public class ApplicationUserController {
         m.addAttribute("userInfo",applicationUserRepository.findById(id).get());
 
         List<Post> thePost = (List<Post>) postRepository.findAllByApplicationUserId(id);
-        m.addAttribute("postClass",new Post());
+//        m.addAttribute("postClass",new Post());
         m.addAttribute("addedPost",thePost);
         return "profilePage.html";
     }
