@@ -14,18 +14,19 @@
     <h1 > Bio : <span th:text="${userInfo.bio}"></span></h1>
 </div>
 
-<form action="'/users/' + ${userInfo.id}" method="post" th:object="${postClass}">
+<form th:action="${userInfo.id}" method="post" th:object="${postClass}">
     <label for="body"> Your post body : </label>
-    <input  id="body" name="body" >
+    <input  id="body" name="body" type="text">
     <label for="createdAt"> Posted at : </label>
-    <input  id="createdAt"  name="createdAt" >
+    <input  id="createdAt"  name="createdAt" type="text">
 
     <input  type="submit" value="Add" >
 </form>
 
-<div th:if="${addedPost != null}">
-    <h3 th:text="${addedPost.body}" > </h3>
-    <h3 th:text="${addedPost.createdAt}"> </h3>
+<div th:each="post : ${addedPost}">
+
+    <h3 th:text="${post.body}" > </h3>
+    <h3 th:text="${post.createdAt}"> </h3>
 </div>
 
 </body>
