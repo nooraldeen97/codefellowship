@@ -40,6 +40,21 @@ public class ApplicationUser implements UserDetails {
     )
     private List<ApplicationUser> following;
 
+    public List<ApplicationUser> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<ApplicationUser> followers) {
+        this.followers = followers;
+    }
+
+    public List<ApplicationUser> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<ApplicationUser> following) {
+        this.following = following;
+    }
 
     public List<Post> getPosts() {
         return posts;
