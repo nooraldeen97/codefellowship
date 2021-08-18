@@ -13,7 +13,9 @@
     <h1 >Date : <span th:text="${userInfo.dateOfBirth}"></span></h1>
     <h1 > Bio : <span th:text="${userInfo.bio}"></span></h1>
 </div>
-
+<div th:if="${userInfo.firstName != currentName}">
+    <button> follow</button>
+</div>
 <form th:action="${userInfo.id}" method="post" th:object="${postClass}">
     <label for="body"> Your post body : </label>
     <input  id="body" name="body" type="text">

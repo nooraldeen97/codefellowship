@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1> Here you have all users </h1>
+<div th:each="user : ${users}" >
+    <h2 th:text="${user.firstName}"></h2>
+    <h2 th:text="${user.lastName}"></h2>
+    <a th:href="'/users/'+ ${user.id}">Go to Profile Page<a/>
+
+</div>
+</body>
+</html>
