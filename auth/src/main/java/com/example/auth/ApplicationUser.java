@@ -25,6 +25,22 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "applicationUser")
      private List <Post> posts;
 
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "following_followers",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "followedby_id")
+    )
+    private List<ApplicationUser> followers;
+
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "following_followers",
+            joinColumns = @JoinColumn(name = "followedby_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<ApplicationUser> following;
+
+
     public List<Post> getPosts() {
         return posts;
     }

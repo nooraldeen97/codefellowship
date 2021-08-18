@@ -64,6 +64,9 @@ public class ApplicationUserController {
         List<Post> thePost = (List<Post>) postRepository.findAllByApplicationUserId(id);
 //        m.addAttribute("postClass",new Post());
         m.addAttribute("addedPost",thePost);
+        m.addAttribute("currentName",principal.getName());
+
+
         return "profilePage.html";
     }
 
@@ -90,6 +93,15 @@ public class ApplicationUserController {
  }
 
 
+
+ @GetMapping("/allUsers")
+    public String getAllUsers(Model model ,Principal principal){
+
+            List<ApplicationUser> applicationUsers= (List<ApplicationUser>) applicationUserRepository.findAll();
+     System.out.println(applicationUsers);
+            model.addAttribute("users",applicationUsers);
+        return "usersIndex.html";
+ }
 
 
 }
