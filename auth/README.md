@@ -1,5 +1,8 @@
 # codefellowship
+
+
 ### Labs 16 && lab 17 : CodeFellowship Login, Profiles & Posts
+
 #### Feature Tasks
 Build an app that allows users to create their profile on CodeFellowship.
 
@@ -22,7 +25,11 @@ A logged-in user should be able to create a Post, and a post should belong to th
 hint: this is a relationship between two pieces of data
 A user’s posts should be visible on their profile page.
 
+<hr>
+
+
 ## lab 18
+
 ### Feature Tasks
 1. Ensure that users can’t perform SQL injection or HTML injection with their posts.
 2. Allow users to follow other users. Following a user means that their posts show up in the logged-in user’s feed, where they can see what all of their followed users have posted recently.
