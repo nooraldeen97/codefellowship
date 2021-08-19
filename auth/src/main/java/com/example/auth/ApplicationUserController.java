@@ -87,10 +87,7 @@ public class ApplicationUserController {
     }
 
 
- @GetMapping ("/error")
-    public String errorHandler(){
-        return "error.html";
- }
+
 
 
 
@@ -103,6 +100,29 @@ public class ApplicationUserController {
         return "usersIndex.html";
  }
 
+ @GetMapping("/follow/{id}")
+    public RedirectView addFollowing(@PathVariable (value = "id") Integer id,Principal p){
+        ApplicationUser userWhoFollow = applicationUserRepository.findByUsername(p.getName());
+        ApplicationUser userWhoReciveFollow= applicationUserRepository.findById(id).get();
+        userWhoFollow.getFollowing().add(userWhoReciveFollow);
+        userWhoReciveFollow.getFollowers().add(userWhoFollow);
+        applicationUserRepository.save(userWhoFollow);
+        applicationUserRepository.save(userWhoReciveFollow);
+        return new RedirectView("/feed");
+ }
 
+    @GetMapping("/feed")
+    public String getAllFeed(Principal p, Model model){
+        model.addAttribute("usernamePrincipal",p.getName());
+        ApplicationUser userWhoFollow=applicationUserRepository.findByUsername(p.getName());
+        List<ApplicationUser>following=userWhoFollow.getFollowers();
+        model.addAttribute("feeds",following);
+        return "feed.html";
+    }
+
+//    @GetMapping ("/error")
+//    public String errorHandler(){
+//        return "error.html";
+//    }
 }
 
