@@ -87,10 +87,7 @@ public class ApplicationUserController {
     }
 
 
- @GetMapping ("/error")
-    public String errorHandler(){
-        return "error.html";
- }
+
 
 
 
@@ -122,5 +119,10 @@ public class ApplicationUserController {
         model.addAttribute("feeds",following);
         return "feed.html";
     }
+
+//    @GetMapping ("/error")
+//    public String errorHandler(){
+//        return "error.html";
+//    }
 }
 
